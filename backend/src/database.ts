@@ -1,10 +1,16 @@
 /*Mongo DB connection */
-import mongoose from 'mongoose'
+import mongoose, { ConnectionOptions, ConnectOptions } from 'mongoose'
+import config from './config';
 
 (async () => {
-    await mongoose.connect('mongodb://127.0.0.1:27017/studentsDB', {
-        useUnifiedTopology: true, 
-        useNewUrlParser: true
-    });
-    console.log('database is connected')
+    try{
+        const mongooseOptions: ConnectionOptions = {
+            useUnifiedTopology: true, 
+            useNewUrlParser: true,
+        }
+        const database = await mongoose.connect(`mongodb://${config.MONGO_HOST}/${config.MONGO_DATABASE}`, mongooseOptions);
+        console.log('database is connected to:', `${config.MONGO_DATABASE}`);
+    } catch(error) {
+        console.error(error)
+    }
 })()
