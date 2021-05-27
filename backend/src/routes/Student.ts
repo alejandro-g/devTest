@@ -34,8 +34,8 @@ const studentSchema = new Schema ({
         trim: true
     }
 }, {
-    versionKey: false, //remove _uid
-    timestamps: true //updated and created at
+    versionKey: false,
+    timestamps: true, //updated and created at
 })
 
 export default model('student', studentSchema); 

@@ -1,6 +1,6 @@
 /*GET,POST,PUT Methods*/
 import { Router } from 'express';
-import  * as studentCtrl  from './students.controller'
+import * as studentCtrl from './students.controller'
 
 const router = Router(); 
 

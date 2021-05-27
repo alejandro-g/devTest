@@ -13,7 +13,7 @@ app.set('port', config.PORT);
 app.use(morgan('dev')) //displays route being called on terminal 
 app.use(cors()) //allows any server to make calls to the backend
 app.use(express.json()); //allows to read json objects from POST methods
-app.use(express.urlencoded({extended: false})); 
+app.use(express.urlencoded({extended: false}));
 
 
 app.use(studentsRoutes);

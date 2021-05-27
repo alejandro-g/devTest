@@ -1,5 +1,5 @@
 /*Mongo DB connection */
-import mongoose, { ConnectionOptions, ConnectOptions } from 'mongoose'
+import mongoose, { ConnectionOptions } from 'mongoose'
 import config from './config';
 
 (async () => {
