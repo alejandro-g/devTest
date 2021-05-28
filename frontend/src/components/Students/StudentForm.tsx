@@ -1,25 +1,35 @@
 /*Modal to add new Student*/
-import React, { ChangeEvent, FormEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useState} from 'react'
+import { toast } from 'react-toastify';
 import { Student } from './Student';
+import * as studentService from './StudentService'
+import {useHistory} from 'react-router-dom'
 
 const StudentForm = () => {
 
-    const [student, setStudent] = useState<Student>({
+    const history = useHistory();
+
+    const initialState = {
         firstName: "",
         lastName: "",
         birthday: "",
         email: "",
         address: "",
         gender: ""
-    });
+    }
+
+    const [student, setStudent] = useState<Student>(initialState);
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setStudent({...student, [e.target.name]: e.target.value})
     }
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
-        console.log(student);
+        await studentService.addStudent(student);
+        toast.success('Student successfully added');
+        setStudent(initialState);
+        history.push('/');
     }
 
     return (
@@ -38,6 +48,7 @@ const StudentForm = () => {
                                     placeholder="Your First Name"
                                     className="form-control"
                                     onChange={handleInputChange}
+                                    value={student.firstName}
                                     autoFocus
                                 />
                                 <br />
@@ -51,6 +62,7 @@ const StudentForm = () => {
                                     placeholder="Your Last Name"
                                     className="form-control"
                                     onChange={handleInputChange}
+                                    value={student.lastName}
                                 />
                                 <br />
                             </div>
@@ -63,6 +75,7 @@ const StudentForm = () => {
                                     placeholder=""
                                     className="form-control"
                                     onChange={handleInputChange}
+                                    value={student.birthday}
                                 />
                                 <br />
                             </div>
@@ -75,6 +88,7 @@ const StudentForm = () => {
                                     placeholder="example@test.com"
                                     className="form-control"
                                     onChange={handleInputChange}
+                                    value={student.email}
                                 />
                                 <br />
                             </div>
@@ -87,6 +101,7 @@ const StudentForm = () => {
                                     placeholder="Enter students address"
                                     className="form-control"
                                     onChange={handleInputChange}
+                                    value={student.address}
                                 ></textarea>
                                 <br />
                             </div>
@@ -99,6 +114,7 @@ const StudentForm = () => {
                                     placeholder="Male/Female"
                                     className="form-control"
                                     onChange={handleInputChange}
+                                    value={student.gender}
                                 />
                                 <br />
                             </div>
