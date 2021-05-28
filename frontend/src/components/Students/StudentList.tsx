@@ -9,7 +9,17 @@ const StudentList = () => {
 
     const loadStudents = async () => {
         const res = await studentService.getStudents()
-        setStudents(res.data)
+
+        // order students listed on the table from earliest to eldest
+        const orderedStudents = res.data.map(student => {
+            return{ 
+                ...student,
+                createdAt: student.createdAt ? new Date(student.createdAt) : new Date(),
+                updatedAt: student.updatedAt ? new Date(student.updatedAt) : new Date(),
+            }
+        })
+        .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime()) 
+        setStudents(orderedStudents);
     }
 
     useEffect(() => {
@@ -18,9 +28,20 @@ const StudentList = () => {
 
     return (
         <div>
-            {students.map((student) => {
-                return <StudentItem student={student} />
-            })}
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th scope="col" style={{textAlign: 'left'}}>Id</th>
+                        <th scope="col" style={{textAlign: 'left'}}>Student Name</th>
+                        <th scope="col" style={{textAlign: 'center'}}>Edit</th>
+                        <th scope="col" style={{textAlign: 'center'}}>Delete</th>
+                        <th scope="col" style={{textAlign: 'center'}}>View Details</th>
+                    </tr>
+                </thead>
+                {students.map((student) => {
+                    return <StudentItem student={student} key={student._id}/>
+                })}
+            </table>
         </div>
     )
 }

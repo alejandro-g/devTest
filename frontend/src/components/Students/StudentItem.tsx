@@ -1,16 +1,24 @@
 import React from 'react'
 import { Student } from './Student'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrash, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
     student: Student
 }
 
 const StudentItem = ({student}:Props) => {
+
+    const fullName = `${student.firstName} ${student.lastName}`;
+
     return (
-        <div>
-            <h1>{student.firstName}</h1>
-            <h2>{student.lastName}</h2>
-        </div>
+            <tr>
+                <th scope="row">{student._id}</th>
+                <td>{fullName}</td>
+                <td style={{textAlign: 'center'}}><button style={{border: 'none'}}><i><FontAwesomeIcon icon={faEdit} /></i></button></td>
+                <td style={{textAlign: 'center'}}><button style={{border: 'none'}}><i><FontAwesomeIcon icon={faTrash} /></i></button></td>
+                <td style={{textAlign: 'center'}}><button style={{border: 'none'}}><i><FontAwesomeIcon icon={faInfoCircle} /></i></button></td>
+            </tr>
     )
 }
 

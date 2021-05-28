@@ -5,7 +5,7 @@ import { Student } from './Student'
 const API = 'http://localhost:5000';
 
 export const getStudents = async () => {
-    return await axios.get(`${API}/students`)
+    return await axios.get<Student[]>(`${API}/students`)
 }
 
 export const addStudent = async (student: Student) => {

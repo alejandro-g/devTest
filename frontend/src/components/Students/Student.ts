@@ -5,7 +5,7 @@ export interface Student {
     firstName: string,
     gender: string,
     lastName: string,
-    createdAt?: string,
-    updatedAt?: string,
+    createdAt?: string | Date,
+    updatedAt?: string | Date,
     _id?: string
 }

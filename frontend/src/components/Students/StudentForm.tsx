@@ -32,6 +32,11 @@ const StudentForm = () => {
         history.push('/');
     }
 
+    /*const handleCancelSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setStudent(initialState);
+    }*/
+
     return (
         <div className="row">
             <div className="col-md-6 offset-md-3">
@@ -120,6 +125,10 @@ const StudentForm = () => {
                             </div>
                             <button className="btn btn-primary">
                                 Submit
+                            </button>
+
+                            <button className="btn btn-primary">
+                                Cancel
                             </button>
                         </form>
                     </div>
