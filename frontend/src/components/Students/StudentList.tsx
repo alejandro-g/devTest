@@ -39,7 +39,7 @@ const StudentList = () => {
                     </tr>
                 </thead>
                 {students.map((student) => {
-                    return <StudentItem student={student} key={student._id}/>
+                    return <StudentItem student={student} key={student._id} loadStudents={loadStudents}/>
                 })}
             </table>
         </div>

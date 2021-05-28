@@ -8,7 +8,6 @@ export const getStudents = async () => {
     return await axios.get<Student[]>(`${API}/students`)
 }
 
-
 export const getStudent = async (id: string) => {
     return await axios.get<Student>(`${API}/students/${id}`)
 }
@@ -19,4 +18,8 @@ export const addStudent = async (student: Student) => {
 
 export const updateStudent = async (id: string, student: Student) => {
     return await axios.put<Student>(`${API}/students/${id}`, student)
+}
+
+export const deleteStudent = async (id: string) => {
+    return await axios.delete<Student>(`${API}/students/${id}`)
 }
