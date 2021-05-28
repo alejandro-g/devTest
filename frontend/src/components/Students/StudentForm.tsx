@@ -1,3 +1,5 @@
+/*Modal to add new Student*/
+
 import React from 'react'
 
 const StudentForm = () => {

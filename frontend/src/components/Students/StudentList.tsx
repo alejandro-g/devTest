@@ -1,11 +1,15 @@
-import React, { useEffect } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { Student } from './Student'
+import * as studentService from './StudentService'
+import StudentItem from './StudentItem'
 
 const StudentList = () => {
 
+    const [students, setStudents] = useState<Student[]>([])
+
     const loadStudents = async () => {
-        const res = await axios.get('http://localhost:5000/students')
-        console.log(res)
+        const res = await studentService.getStudents()
+        setStudents(res.data)
     }
 
     useEffect(() => {
@@ -14,7 +18,9 @@ const StudentList = () => {
 
     return (
         <div>
-            student list
+            {students.map((student) => {
+                return <StudentItem student={student} />
+            })}
         </div>
     )
 }
