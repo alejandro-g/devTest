@@ -1,13 +1,18 @@
 /*Modal to add new Student*/
-import React, { ChangeEvent, FormEvent, useState} from 'react'
+import React, { ChangeEvent, FormEvent, useEffect, useState} from 'react'
 import { toast } from 'react-toastify';
 import { Student } from './Student';
 import * as studentService from './StudentService'
-import {useHistory} from 'react-router-dom'
+import {useHistory, useParams} from 'react-router-dom'
+
+interface Params {
+    id: string,
+}
 
 const StudentForm = () => {
 
     const history = useHistory();
+    const params = useParams<Params>(); 
 
     const initialState = {
         firstName: "",
@@ -26,11 +31,31 @@ const StudentForm = () => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
-        await studentService.addStudent(student);
-        toast.success('Student successfully added');
-        setStudent(initialState);
+
+        if(!params.id) {
+            await studentService.addStudent(student);
+            toast.success('Student successfully added');
+            setStudent(initialState);
+        } else {
+            await studentService.updateStudent(params.id, student);
+            toast.success('Student successfully updated');
+        }
+
         history.push('/');
     }
+
+    const getStudent = async (id: string) => {
+        const res = await studentService.getStudent(id);
+        const { firstName, lastName, birthday, email, address, gender} = res.data;
+        setStudent({firstName, lastName, birthday, email, address, gender})
+
+    }
+
+    // check if params.id exists
+    useEffect(() => {
+        if (params.id)
+            getStudent(params.id);
+    },[params.id])
 
     /*const handleCancelSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -123,11 +148,15 @@ const StudentForm = () => {
                                 />
                                 <br />
                             </div>
-                            <button className="btn btn-primary">
-                                Submit
-                            </button>
 
-                            <button className="btn btn-primary">
+                            {
+                                params.id ? 
+                                <button className="btn btn-primary">Update Student</button>
+                                :
+                                <button className="btn btn-primary">Add Student</button>
+                            }
+
+                            <button id="cancel" className="btn btn-primary">
                                 Cancel
                             </button>
                         </form>

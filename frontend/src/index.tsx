@@ -20,6 +20,7 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" component={StudentList}></Route>
           <Route path="/new-student" component={StudentForm}></Route>
+          <Route path="/update/:id" component={StudentForm}></Route>
         </Switch>
         <ToastContainer />
       </div>
