@@ -34,7 +34,7 @@ const studentSchema = new Schema ({
         trim: true
     }
 }, {
-    versionKey: false,
+    versionKey: false, //remove _uid
     timestamps: true, //updated and created at
 })
 

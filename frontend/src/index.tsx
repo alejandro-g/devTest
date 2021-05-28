@@ -11,11 +11,16 @@ import Navbar from './components/Navbar/Navbar';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+
       <Navbar />
-        <Switch>
+
+      <div className="container p-4">
+      <Switch>
           <Route  exact path="/" component={StudentList}></Route>
           <Route path="/new-student" component={StudentForm}></Route>
         </Switch>
+      </div>
+
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
